@@ -29,6 +29,15 @@ function RecordAnswerSection() {
         },[results])
 
 
+        const SaveUserAnswer =()=>{
+            if(isRecording){
+                stopSpeechToText()
+            }
+            else{
+                startSpeechToText()
+            }
+        }
+
   return (
     <div className='flex items-center justify-center flex-col'>
         <div className='flex flex-col mt-3 justify-center items-center bg-black rounded-lg p-5'>
@@ -45,12 +54,12 @@ function RecordAnswerSection() {
         </div>
 
         <Button variant = 'outline' className = "my-11"
-        onClick = {isRecording?stopSpeechToText:startSpeechToText}
+        onClick = {SaveUserAnswer}
 
         >
             {isRecording?
-            <h2>
-                <Mic/> 'Recording...'
+            <h2 className='text-red-700 flex gap-2'>
+                <Mic/> Stop Recording...
             </h2>
             : 
 

@@ -1,8 +1,19 @@
 import { index } from "drizzle-orm/mysql-core";
-import { Lightbulb } from "lucide-react";
-import React from "react";
+import { Lightbulb, Volume2 } from "lucide-react";
+import React from "react"
 
 function QuestionsSection({mockInterviewQuestion, activeQuestionIndex}){
+
+
+    const textToSpeach=(text)=>{
+            if('speechSynthesis' in window){
+                const speech = new SpeechSynthesisUtterance(text);
+                window.speechSynthesis.speak(speech)
+            }
+            else{
+                alert('Sorry, Your browser does not Support this.')
+            }
+    }
 
     return  mockInterviewQuestion&&(
         <div className="mt-3 p-5 border rounded-lg">
@@ -15,7 +26,11 @@ function QuestionsSection({mockInterviewQuestion, activeQuestionIndex}){
 
             <h2  className="  mt-14 text-md md:text-lg text-center">
                 {mockInterviewQuestion.questions[activeQuestionIndex]?.question}
-            </h2>
+            </h2> 
+
+            <Volume2 
+            className="mt-3 cursor-pointer"
+            onClick={()=>textToSpeach(mockInterviewQuestion.questions[activeQuestionIndex]?.question)}/>
 
             <div className="border rounded-lg mt-28 p-5 bg-blue-50">
                 <h2 className="flex gap-2  text-blue-800">
